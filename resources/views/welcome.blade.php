@@ -827,6 +827,20 @@
                 padding: 2rem
             }
         }
+
+        .button {
+            margin-top:12px;
+            background-color: #4CAF50;
+            /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor:pointer;
+        }
     </style>
 </head>
 
@@ -1016,7 +1030,7 @@
         <form action="{{ route('convert.docxToPdf') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <input type="file" name="docx">
-            <button type="submit">Convert to PDF</button>
+            <button type="submit" class="button">Convert to PDF</button>
         </form>
 
     </div>
