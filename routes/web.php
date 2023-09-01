@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Resources\UserCollection;
+use App\Http\Resources\UserResource;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use PhpOffice\PhpWord\IOFactory;
@@ -8,6 +11,8 @@ use Illuminate\Support\Facades\Storage;
 
 
 Route::get('/', function () {
+    $user = User::all();
+    dd(new UserCollection($user));
     return view('welcome');
 });
 
