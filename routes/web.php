@@ -11,8 +11,7 @@ use Illuminate\Support\Facades\Storage;
 
 
 Route::get('/', function () {
-    $user = User::all();
-    dd(new UserCollection($user));
+    $user = User::find(1);
     return view('welcome');
 });
 
