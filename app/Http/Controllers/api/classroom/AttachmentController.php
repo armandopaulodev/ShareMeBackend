@@ -46,12 +46,12 @@ class AttachmentController extends Controller
                 $pdfFilePath = Storage::url($storagePath . '/' . $pdfFilename);
 
                 $atach = new Attachment();
-                $atach->url = $pdfFilePath;
+                $atach->url = asset($pdfFilePath);
                 $atach->user_id = 1;
                 $atach->save();
 
                 
-                return response()->json(['message' => $atach->uri()], 200);
+                return response()->json([$atach], 200);
             } else {
                 return response()->json(['message' => 'No file uploaded'], 400);
             }

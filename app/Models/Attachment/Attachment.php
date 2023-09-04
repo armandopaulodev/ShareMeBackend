@@ -21,7 +21,7 @@ class Attachment extends Model
         return $this->belongsTo(Subject::class);
     }
 
-    public function uri(){
+    public function uri(){ // nolonger needed
         return asset($this->url);
     }
 }
