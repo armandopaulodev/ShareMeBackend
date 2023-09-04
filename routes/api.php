@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\api\auth\AuthController;
+use App\Http\Controllers\api\classroom\AttachmentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +22,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('login', [AuthController::class, 'login']);
+
+Route::controller(AttachmentController::class)->group(function () {
+    
+    Route::middleware('auth:sanctum')->group(function (){
+        
+    });
+
+    Route::post('convert/file', 'convertion')->name('file.convertion');
+});
