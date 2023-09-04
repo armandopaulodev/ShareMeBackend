@@ -22,6 +22,6 @@ class Attachment extends Model
     }
 
     public function uri(){
-        return Storage::disk()->url($this->url);
+        return asset($this->url);
     }
 }

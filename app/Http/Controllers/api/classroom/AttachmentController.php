@@ -50,12 +50,8 @@ class AttachmentController extends Controller
                 $atach->user_id = 1;
                 $atach->save();
 
-                // Construct a full URL for the saved PDF file without extra slashes
-                $protocol = $request->secure() ? 'https://' : 'http://';
-                $domain = $request->getHttpHost();
-                $pdfFileUrl = $protocol . $domain . '/storage/' . $storagePath . '/' . $pdfFilename;
-
-                return response()->json(['message' => $pdfFileUrl], 200);
+                
+                return response()->json(['message' => $atach->uri()], 200);
             } else {
                 return response()->json(['message' => 'No file uploaded'], 400);
             }
