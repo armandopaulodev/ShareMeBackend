@@ -45,7 +45,17 @@ class AttachmentController extends Controller
                 // Return a response with the file path or URL
                 $pdfFilePath = Storage::url($storagePath . '/' . $pdfFilename);
 
-                return response()->json(['message' => $pdfFilePath], 200);
+                $atach = new Attachment();
+                $atach->url = $pdfFilePath;
+                $atach->user_id = 1;
+                $atach->save();
+
+                // Construct a full URL for the saved PDF file without extra slashes
+                $protocol = $request->secure() ? 'https://' : 'http://';
+                $domain = $request->getHttpHost();
+                $pdfFileUrl = $protocol . $domain . '/storage/' . $storagePath . '/' . $pdfFilename;
+
+                return response()->json(['message' => $pdfFileUrl], 200);
             } else {
                 return response()->json(['message' => 'No file uploaded'], 400);
             }
