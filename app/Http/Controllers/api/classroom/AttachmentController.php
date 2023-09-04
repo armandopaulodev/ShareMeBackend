@@ -45,7 +45,6 @@ class AttachmentController extends Controller
                 // Return a response with the file path or URL
                 $pdfFilePath = Storage::url($storagePath . '/' . $pdfFilename);
 
-
                 return response()->json(['message' => $pdfFilePath], 200);
             } else {
                 return response()->json(['message' => 'No file uploaded'], 400);
