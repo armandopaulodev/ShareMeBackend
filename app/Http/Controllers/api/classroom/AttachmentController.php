@@ -77,19 +77,11 @@ class AttachmentController extends Controller
 
                 $file = $request->file('file');
                 $fileName = $file->getClientOriginalName();
-
-           
-                // $path = Storage::putFileAs(
-                //     'files', $request->file('file'), $fileName
-                // );
-                
-
                 $path = $file->storeAs('files', $fileName, 'public');
 
-                dd(asset(Storage::url($path)));
-
                 $atach = new Attachment();
-                $atach->url = asset($file);
+                $atach->url = asset(Storage::url($path));
+                $atach->name = $fileName;
                 $atach->user_id = 1;
                 $atach->save(); 
 
