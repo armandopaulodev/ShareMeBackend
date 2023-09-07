@@ -30,4 +30,6 @@ Route::controller(AttachmentController::class)->group(function () {
     });
 
     Route::post('convert/file', 'convertion')->name('file.convertion');
+    Route::get('get/temp/file', 'getTempFile');
+    Route::post('upload/file', 'uploadFile');
 });

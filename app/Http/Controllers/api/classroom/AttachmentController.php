@@ -50,13 +50,55 @@ class AttachmentController extends Controller
                 $atach->user_id = 1;
                 $atach->save();
 
-                
-                return response()->json([$atach], 200);
+
+                return response()->json(['data' => $atach, 'status' => 200]);
             } else {
                 return response()->json(['message' => 'No file uploaded'], 400);
             }
         } catch (\Exception $e) {
-            // Handle any exceptions or errors that may occur during file processing
+            return response()->json(['message' => 'File upload failed'], 500);
+        }
+    }
+
+    public function getTempFile()
+    {
+        $attacments = Attachment::where('subject_id', null)->orderBy('created_at', 'desc')->get();
+        return response()->json(['data' => $attacments, 'status' => 200]);
+    }
+
+    public function uploadFile(Request $request)
+    {
+
+        try {
+            // Check if a file was uploaded
+            if ($request->hasFile('file')) {
+
+                
+
+                $file = $request->file('file');
+                $fileName = $file->getClientOriginalName();
+
+           
+                // $path = Storage::putFileAs(
+                //     'files', $request->file('file'), $fileName
+                // );
+                
+
+                $path = $file->storeAs('files', $fileName, 'public');
+
+                dd(asset(Storage::url($path)));
+
+                $atach = new Attachment();
+                $atach->url = asset($file);
+                $atach->user_id = 1;
+                $atach->save(); 
+
+                $attacments = Attachment::where('subject_id', null)->orderBy('created_at', 'desc')->get();
+                return response()->json(['data' => $attacments, 'status' => 200]);
+            } else {
+                return response()->json(['message' => 'No file uploaded'], 400);
+            }
+        } catch (\Exception $e) {
             return response()->json(['message' => 'File upload failed'], 500);
         }
     }

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('attachments', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name');
             $table->text('url');
             $table->timestamps();
             $table->softDeletes();
