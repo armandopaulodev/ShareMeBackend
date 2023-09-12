@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('attachments', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->integer('download_limit')->nullable();
+            $table->dateTime('expire_at')->nullable();
             $table->text('url');
             $table->timestamps();
             $table->softDeletes();

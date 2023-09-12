@@ -47,6 +47,8 @@ class AttachmentController extends Controller
 
                 $atach = new Attachment();
                 $atach->url = asset($pdfFilePath);
+                $atach->name = $pdfFilename;
+                $atach->download_limit = 5;
                 $atach->user_id = 1;
                 $atach->save();
 
@@ -62,6 +64,7 @@ class AttachmentController extends Controller
 
     public function getTempFile()
     {
+      
         $attacments = Attachment::where('subject_id', null)->orderBy('created_at', 'desc')->get();
         return response()->json(['data' => $attacments, 'status' => 200]);
     }
